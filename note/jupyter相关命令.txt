@@ -1,0 +1,73 @@
+01. 配置jupyter文件路径
+    01. 获取配置文件所在路径
+        jupyter notebook --generate-config
+        默认路径：C:\Users\lampard\.jupyter\jupyter_notebook_config.py
+    02. 查找关键字：c.NotebookApp.notebook_dir
+
+02. 添加清华镜像
+    01. 显示conda配置
+        conda config --show channels
+    02. 设置清华镜像
+        conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+        conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
+        conda config --set show_channel_urls yes
+
+03. conda常用命令整理
+    01. 环境管理
+        01. 创建环境
+            conda create --name your_env_name
+            conda create --name your_env_name python=3.8
+        02. 列举当前所有环节
+            conda info
+            conda env list
+        03. 进入某个环境
+            activate your_env_name
+        04. 退出某个环境
+            deactivate
+        05. 复制某个环境
+            conda create --name new_env_name --clone old_env_name
+        06. 删除某个环境
+            conda remove --name your_env_name --all
+    02. 分享环境
+        01. 进入要分享的环境
+            activate target_env
+        02. 生成yml文件
+            conda env export > environment.yml
+        03. 其他人拿到yml文件后，将其放在工作目录下，通过下面命令创建
+            conda env create -f environment.yml
+    03. 包管理
+        01. 列举当前环境下的包
+            conda list
+            conda list -n your_env_name
+        02. 为指定环境安装包
+            conda install package_name
+            conda install -n env_name package_name
+
+04. “Conda”安装
+    conda install nb_conda
+
+05. “Nbextensions”安装
+    conda install -c conda-forge jupyter_contrib_nbextensions
+    若速度慢，可以使用下面命令：
+    Pip install jupyter_contrib_nbextensions -i https://pypi.douban.com/simple
+    Pip install jupyter_nbextensions_configurator -i https://pypi.douban.com/simple
+    Jupyter contrib nbextension install --user
+
+06. ipykernel
+    01. 切换至需安装内核的环境
+        activate env_name
+    02. 检查该环境是否安装ipykernel包
+        conda list
+        若没有安装，则进行安装：
+        conda install ipykernel
+    03. 为当前环境下的当前用户安装python内核
+        python3 -m ipykernel install --user --name <env_name> --display-name "<notebook_name>"
+        注意：
+        <env_name>为当前环境的名称
+        "<notebook_name>"为自定义显示在Jupyter Notebook中的名称。名称两边不加尖括号“<>”，但双引号必须加
+    举例：
+    conda create --name fluent python=3.8
+    conda install ipykernel
+    conda remove --name fluent --all
+
+
